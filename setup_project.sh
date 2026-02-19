@@ -23,18 +23,11 @@ echo "Directory architecture created successfully."
 tree "$parent_dir"
 
 <<<<<<< HEAD
-cat <<EOF >"$parent_dir/reports/reports,log"[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.
-[2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class.
-
-cat<<EOF > "$parent_dir/Helpers/confi.json"{
-      "thresholds": {
-=======
-cat <<EOF > "$parent_dir/reports"[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.
-[2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class.
+cat <<EOF >"$parent_dir/reports/reports,log"[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.[2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class.
 
 cat <<EOF > parent_dir/Helpers/config.json"{
-    "thresholds": {
->>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
+    "thresholds": 
+[
         "warning": 75,
         "failure": 50
     },
@@ -42,35 +35,14 @@ cat <<EOF > parent_dir/Helpers/config.json"{
 <<<<<<< HEAD
     "total_sessions": 1s
 }
-=======
 
-cat <<EOF >"$parent_dir/Helpers/assets" Email,Names,Attendance Count,Absence Count
-=======
-    "total_sessions": 15
-<<<<<<< HEAD
-}"
-
-=======
-
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
-cat <<EOF >$parent_dir/Helpers/assets "Email,Names,Attendance Count,Absence Count
->>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
+cat <<EOF >$parent_dir/Helpers/assets.csv "Email,Names,Attendance Count,Absence Count
 alice@example.com,Alice Johnson,14,1
 bob@example.com,Bob Smith,7,8
 charlie@example.com,Charlie Davis,4,11
-<<<<<<< HEAD
-<<<<<<< HEAD
 diana@example.com,Diana Prince,15,0
-=======
-diana@example.com,Diana Prince,15,0" 
->>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
 
 cat > attendance_checker.py << EOF 
-=======
-diana@example.com,Diana Prince,15,0" >assets.csv
-
- cat > atttendance_checker.py << EOF
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
 import csv
 import json
 import os
@@ -90,40 +62,25 @@ def run_attendance_check():
     with open('Helpers/assets.csv', mode='r') as f, open('reports/reports.log', 'w') as log:
         reader = csv.DictReader(f)
         total_sessions = config['total_sessions']
-<<<<<<< HEAD
-
-        log.write(f"--- Attendance Report Run: {datetime.now()} ---\n")
-
-=======
         
         log.write(f"--- Attendance Report Run: {datetime.now()} ---\n")
         
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
         for row in reader:
             name = row['Names']
             email = row['Email']
             attended = int(row['Attendance Count'])
-<<<<<<< HEAD
 
-            # Simple Math: (Attended / Total) * 100
-            attendance_pct = (attended / total_sessions) * 100
-
-=======
             
             # Simple Math: (Attended / Total) * 100
             attendance_pct = (attended / total_sessions) * 100
             
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
+
             message = ""
             if attendance_pct < config['thresholds']['failure']:
                 message = f"URGENT: {name}, your attendance is {attendance_pct:.1f}%. You will fail this class."
             elif attendance_pct < config['thresholds']['warning']:
                 message = f"WARNING: {name}, your attendance is {attendance_pct:.1f}%. Please be careful."
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
             if message:
                 if config['run_mode'] == "live":
                     log.write(f"[{datetime.now()}] ALERT SENT TO {email}: {message}\n")
