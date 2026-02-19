@@ -181,8 +181,8 @@ fi
   else
 	  echo "warning: python3 is not found. install it to continue.'
 #Verify the application directory structure
-if [ -f "attendance_checker.py" ] && [ -f "assets.csv" ]; then
-    echo "Success: Application directory structure is correct."
+if [[ -f "attendance_checker.py" -f "assets.csv" -f "config.json" ]]; then
+    echo "{ok] All application files are present in the directory."
 else
     echo "Warning: Required files are missing from the directory."
 fi
