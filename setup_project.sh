@@ -21,13 +21,7 @@ echo "Directory architecture created successfully."
 
 # Display structure
 tree "$parent_dir"
-<<<<<<< HEAD
- coping in the files
 
-=======
-
-#coping the files in
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
 echo "[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.
 [2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class." >reports.log
 
@@ -67,11 +61,7 @@ def run_attendance_check():
     # 1. Load Config
     with open('Helpers/config.json', 'r') as f:
         config = json.load(f)
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
     # 2. Archive old reports.log if it exists
     if os.path.exists('reports/reports.log'):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
