@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#step 1
 # Ask user input muhizi-hue
 echo "testing up"
 read input
