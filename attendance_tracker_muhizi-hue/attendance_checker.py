@@ -1,47 +1,4 @@
-#!/usr/bin/env bash
-
-# Ask user input muhizi-hue
-echo "testing up"
-read input
-
-# Parent directory
-parent_dir="attendance_tracker_${input}"
-
-# Create directory structure
-mkdir -p "$parent_dir/Helpers"
-mkdir -p "$parent_dir/reports"
-
-# Create required files
-touch "$parent_dir/attendance_checker.py"
-touch "$parent_dir/Helpers/assets.csv"
-touch "$parent_dir/Helpers/config.json"
-touch "$parent_dir/reports/reports.log"
-
-echo "Directory architecture created successfully."
-
-# Display structure
-tree "$parent_dir"
-
-#coping the files in
-echo "[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.
-[2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class." >reports.log
-
-echo "{
-    "thresholds": {
-        "warning": 75,
-        "failure": 50
-    },
-    "run_mode": "live",
-    "total_sessions": 15
-}"  >config.json
-
-echo "Email,Names,Attendance Count,Absence Count
-alice@example.com,Alice Johnson,14,1
-bob@example.com,Bob Smith,7,8
-charlie@example.com,Charlie Davis,4,11
-diana@example.com,Diana Prince,15,0" >assets.csv
-
- cat > atttendance_checker.py << EOF
+#!/bin/bash
 import csv
 import json
 import os
@@ -51,7 +8,7 @@ def run_attendance_check():
     # 1. Load Config
     with open('Helpers/config.json', 'r') as f:
         config = json.load(f)
-    
+
     # 2. Archive old reports.log if it exists
     if os.path.exists('reports/reports.log'):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -61,23 +18,23 @@ def run_attendance_check():
     with open('Helpers/assets.csv', mode='r') as f, open('reports/reports.log', 'w') as log:
         reader = csv.DictReader(f)
         total_sessions = config['total_sessions']
-        
+
         log.write(f"--- Attendance Report Run: {datetime.now()} ---\n")
-        
+
         for row in reader:
             name = row['Names']
             email = row['Email']
             attended = int(row['Attendance Count'])
-            
+
             # Simple Math: (Attended / Total) * 100
             attendance_pct = (attended / total_sessions) * 100
-            
+
             message = ""
             if attendance_pct < config['thresholds']['failure']:
                 message = f"URGENT: {name}, your attendance is {attendance_pct:.1f}%. You will fail this class."
             elif attendance_pct < config['thresholds']['warning']:
                 message = f"WARNING: {name}, your attendance is {attendance_pct:.1f}%. Please be careful."
-            
+
             if message:
                 if config['run_mode'] == "live":
                     log.write(f"[{datetime.now()}] ALERT SENT TO {email}: {message}\n")
@@ -87,5 +44,3 @@ def run_attendance_check():
 
 if __name__ == "__main__":
     run_attendance_check()
-EOF
-
