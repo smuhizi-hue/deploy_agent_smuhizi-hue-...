@@ -184,3 +184,15 @@ else
   echo "No changes made."
 fi
 
+ step 4
+ #verifying if python3 is installed
+  if python3 version > /dev/null 2>&1; then
+	  echo "success: python3 is installed on the system."
+  else
+	  echo "warning: python3 is not found. install it to continue.'
+#Verify the application directory structure
+if [ -f "attendance_checker.py" ] && [ -f "assets.csv" ]; then
+    echo "Success: Application directory structure is correct."
+else
+    echo "Warning: Required files are missing from the directory."
+fi
