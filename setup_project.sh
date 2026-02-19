@@ -26,12 +26,6 @@ tree "$parent_dir"
 cat <<EOF >"$parent_dir/reports/reports,log"[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.
 [2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class.
 
-cat<<EOF > "$parent_dir/Helpers/confi.json"{
-      "thresholds": {
-=======
-cat <<EOF > "$parent_dir/reports"[2026-02-06 18:10:01.469363] ALERT SENT TO bob@example.com: URGENT: Bob Smith, your attendance is 46.7%. You will fail this class.
-[2026-02-06 18:10:01.469424] ALERT SENT TO charlie@example.com: URGENT: Charlie Davis, your attendance is 26.7%. You will fail this class.
-
 cat <<EOF > parent_dir/Helpers/config.json"{
     "thresholds": {
 >>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
@@ -42,18 +36,9 @@ cat <<EOF > parent_dir/Helpers/config.json"{
 <<<<<<< HEAD
     "total_sessions": 1s
 }
-=======
-
-cat <<EOF >"$parent_dir/Helpers/assets" Email,Names,Attendance Count,Absence Count
-=======
-    "total_sessions": 15
-<<<<<<< HEAD
-}"
-
-=======
 
 >>>>>>> c03707929522fb357a15b374d35dc4641fdec0e8
-cat <<EOF >$parent_dir/Helpers/assets "Email,Names,Attendance Count,Absence Count
+cat <<EOF >$parent_dir/Helpers/assets.csv "Email,Names,Attendance Count,Absence Count
 >>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
 alice@example.com,Alice Johnson,14,1
 bob@example.com,Bob Smith,7,8
