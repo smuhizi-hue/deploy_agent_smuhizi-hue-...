@@ -43,12 +43,8 @@ cat <<EOF >$parent_dir/Helpers/assets.csv "Email,Names,Attendance Count,Absence 
 alice@example.com,Alice Johnson,14,1
 bob@example.com,Bob Smith,7,8
 charlie@example.com,Charlie Davis,4,11
-<<<<<<< HEAD
-<<<<<<< HEAD
 diana@example.com,Diana Prince,15,0
-=======
-diana@example.com,Diana Prince,15,0" 
->>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
+
 
 cat > attendance_checker.py << EOF 
 =======
