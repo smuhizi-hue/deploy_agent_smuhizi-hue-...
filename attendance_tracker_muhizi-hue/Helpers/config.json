@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash
 echo "{
     "thresholds": {
@@ -8,3 +9,7 @@ echo "{
     "total_sessions": 15
 }"
 >config.json
+=======
+{ "total_sessions": 15, "run_mode:  " live" ,"thresholds" :{" warning" : 75 , "failure": 50}}
+
+>>>>>>> 908d5bf3d40b52f27114c9c0aa761cacfa291a22
